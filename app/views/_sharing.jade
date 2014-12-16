@@ -1,0 +1,12 @@
+div.sharing-options
+  h3 You can copy the following link to share these options, or post directly to one of your favorite Social Networks
+
+  input(type='text', value='...').large
+
+  ul
+    li: a(href='#', data-url='https://www.facebook.com/sharer/sharer.php?u=[URL]', target='_blank', title='Share on Facebook'): i.icon-facebook!=''
+    li: a(href='#', data-url='https://twitter.com/share?url=[URL]', target='_blank', title='Share on Twitter'): i.icon-twitter!=''
+    li: a(href='#', data-url='https://plus.google.com/share?url=[URL]', target='_blank', title='Share on Google+'): i.icon-google-plus!=''
+
+  a(href='#').share-close
+    i.icon-close!=''

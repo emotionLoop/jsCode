@@ -1,0 +1,77 @@
+
+//- # layout
+
+doctype
+html.no-js
+  head
+    title= typeof title === 'string' ? 'JavaScript Coding Styles - jsCode - ' + title : 'JavaScript Coding Styles - jsCode'
+    block meta
+      meta(charset='utf-8')
+      meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+      meta(name='description', content='Generate and share JavaScript coding guidelines.')
+      meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+      meta(name='author', content='Bruno Bernardino')
+    <!-- build:css /css/app.css -->
+    block stylesheets
+      link(rel='stylesheet', href='/css/base.css')
+      link(rel='stylesheet', href='/css/skeleton.css')
+      link(rel='stylesheet', href='/css/fontello.css')
+      link(rel='stylesheet', href='/bower/highlightjs/styles/github.css')
+      link(rel='stylesheet', href='/bower/sweetalert/lib/sweet-alert.css')
+      link(rel='stylesheet', href='/css/layout.css')
+    <!-- endbuild -->
+
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='apple-touch-icon', href='/apple-touch-icon.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='/apple-touch-icon-114x114.png')
+
+    != "<!--[if lt IE 9]>"
+    script(src='/bower/es5-shim/es5-shim.min.js')
+    script(src='/bower/json3/lib/json3.min.js')
+    != "<!--<![endif]-->"
+  body
+
+    .overlay!=''
+
+    .app-container
+
+      p.old-browser You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.
+
+      .main-loading!=''
+
+      .logo
+        a(href='/')
+          img(src='/img/logo.png', alt='jsCode')
+
+      nav.menu
+        ul
+          li: a(href='/') Generate
+          li: a(href='/#popular') Popular
+          li: a(href='/#why') Why
+
+      header.main-header
+        h1 Custom JavaScript
+          br
+          | Coding Guidelines
+
+        p Generate and share your own JavaScript coding guidelines
+
+      .container
+        block content
+
+      footer.main-footer
+        p ©
+          a(href='http://emotionloop.com', target='_blank') emotionLoop
+
+    <!-- build:js /js/app.js -->
+    block scripts
+      script(src='/bower/jquery/dist/jquery.js')
+      script(src='/bower/highlightjs/highlight.pack.js')
+      script(src='/bower/sweetalert/lib/sweet-alert.min.js')
+      script(src='/js/plugins.js')
+      script(src='/js/main.js')
+    <!-- endbuild -->
+
+    block messages
+      include _messages.jade

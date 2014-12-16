@@ -1,0 +1,45 @@
+
+//- # package - show
+
+extends ../layout
+
+block content
+  section.package-container.sixteen.columns.alpha.omega
+
+    h2.twelve.columns.boxed The JavaScript coding guidelines chosen for this package are the following:
+
+    each setting in _package.convertedSettings
+      .package-setting-container.twelve.columns.boxed
+        h3
+          span #{ setting.group }:
+          | #{ setting.label }
+          a(href='#', data-helper=setting.id).helper-open
+            i.icon-help!=''
+        .helper(data-id=setting.id)!=setting.helper
+        a.helper-close(href='#', data-helper=setting.id)
+          i.icon-close!=''
+
+    .twelve.columns.boxed.buttons-container
+      a(href='/#{_package.slug}/jshintrc', target='_blank').jshintrc-button.button.large Download .jshintrc
+      button(type='button').show-badge.badge-button.button.large Get Badge
+
+    h3.twelve.columns.boxed Below you can find some <em>(non-working)</em> sample code that follows the guidelines for this package. It should have examples for most of the situations you'll encounter:
+
+    if ( _package.convertedSettings[0].label === 'Tabs' )
+      p.warning-note.twelve.columns.boxed
+        strong Please note
+        |  we can't change how many spaces a tab occupies here in the browser, so you'll always see 8 instead of #{ _package.convertedSettings[1].label }.
+
+    .sample-code.sixteen.columns.boxed(hljs, language='javascript')!=_package.sampleCode
+
+    p.twelve.columns.boxed If you want to generate your own JavaScript coding guidelines, just <a href="/">Generate Your Own Package</a>.
+
+    p.twelve.columns.boxed You can also <a href="#" class="share-options"><i class="icon-share"></i>Share these Code Guidelines!</a>
+
+    include ../_sharing.jade
+    include ../_badge.jade
+
+append scripts
+  script(src='/js/package.js')
+  script.
+    window.packageSlug = '#{ _package.slug }';

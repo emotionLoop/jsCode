@@ -1,0 +1,305 @@
+<%- quoteChar %>use strict<%- quoteChar %><%- semicolon %>
+
+<% if ( declareOnce ) { %>
+var <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Base_Service<% } else { %>BaseService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Base_Srv<% } else { %>BaseSrv<% } %><% } %> = require(<%- jumboSpace %><%- quoteChar %>./BaseService<%- quoteChar %><%- jumboSpace %>)<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>Q = require(<%- jumboSpace %><%- quoteChar %>q<%- quoteChar %><%- jumboSpace %>)<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>async = require(<%- jumboSpace %><%- quoteChar %>async<%- quoteChar %><%- jumboSpace %>)<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>crypto = require(<%- jumboSpace %><%- quoteChar %>crypto<%- quoteChar %><%- jumboSpace %>)<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>fs = require(<%- jumboSpace %><%- quoteChar %>fs<%- quoteChar %><%- jumboSpace %>)<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>ejs = require(<%- jumboSpace %><%- quoteChar %>ejs<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<% } else { %>
+var <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Base_Service<% } else { %>BaseService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Base_Srv<% } else { %>BaseSrv<% } %><% } %> = require(<%- jumboSpace %><%- quoteChar %>./BaseService<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+var Q = require(<%- jumboSpace %><%- quoteChar %>q<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+var async = require(<%- jumboSpace %><%- quoteChar %>async<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+var crypto = require(<%- jumboSpace %><%- quoteChar %>crypto<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+var fs = require(<%- jumboSpace %><%- quoteChar %>fs<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+var ejs = require(<%- jumboSpace %><%- quoteChar %>ejs<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<% } %>
+module.exports = function(<%- jumboSpace %>db, models<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<% } %>{
+<%- i %>var <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %> = <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Base_Service<% } else { %>BaseService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Base_Srv<% } else { %>BaseSrv<% } %><% } %>.extend(<% if ( blockSpace === 1 ) { %>
+<%- i %><% } %>{
+<%- i %><%- i %>
+<%- i %><%- i %>// Create a New Package
+<%- i %><%- i %>create: function(<%- jumboSpace %>data<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>{
+<% if ( declareOnce ) { %>
+<%- i %><%- i %><%- i %>var deferred = Q.defer()<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>self = this<%- semicolon %>
+<% } else { %>
+<%- i %><%- i %><%- i %>var deferred = Q.defer()<%- semicolon %>
+<%- i %><%- i %><%- i %>var self = this<%- semicolon %>
+<% } %>
+<%- i %><%- i %><%- i %>if (<%- jumboSpace %>!<%- jumboSpace %>data.settings<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %>deferred.reject(<%- jumboSpace %><%- quoteChar %>No settings provided<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %>}<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %>// We need data.settings to be a string, but we accept a string or an object
+<%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>typeof data.settings === <%- quoteChar %>object<%- quoteChar %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %>data.settings = JSON.stringify(<%- jumboSpace %>data.settings<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %>}
+
+<%- i %><%- i %><%- i %><%- i %>// Check if a similar package exists (with the same configs) and return it if so
+<%- i %><%- i %><%- i %><%- i %>this.find(<% if ( blockSpace === 1 ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>where:<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>settings: data.settings
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then(<%- jumboSpace %>function(<%- jumboSpace %>results<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// No similar packages found, go ahead and create a new one
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>results.length === 0<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>data.slug = self.<% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>get_unique_slug<% } else { %>getUniqueSlug<% } %><% } else { %><% if ( functionCase === 0 ) { %>get_uslug<% } else { %>getUSlug<% } %><% } %>()<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// Force views to be 0
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>data.views = 0<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>models.Package.create(<%- jumboSpace %>data<%- jumboSpace %>)<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>success(<%- jumboSpace %>deferred.resolve<%- jumboSpace %>)<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>error(<%- jumboSpace %>deferred.reject<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// We found a similar package, so let<%- quoteChar %>s return that
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>deferred.resolve(<%- jumboSpace %>results[0]<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+
+<%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>fail(<%- jumboSpace %>function(<%- jumboSpace %><% if ( variableNaming === 0 ) { %>error<% } else { %>err<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>deferred.reject(<%- jumboSpace %><% if ( variableNaming === 0 ) { %>error<% } else { %>err<% } %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %>})<%- semicolon %>
+<%- i %><%- i %><%- i %>}
+
+<%- i %><%- i %><%- i %>return deferred.promise<%- semicolon %>
+<%- i %><%- i %>}
+<%- i %>})<%- semicolon %>
+
+<%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>.Model = models.Package<%- semicolon %>
+
+<%- i %>return new <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>(<%- jumboSpace %>db<%- jumboSpace %>)<%- semicolon %>
+}<%- semicolon %>
+
+module.exports = function(<%- jumboSpace %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>, <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Setting_Service<% } else { %>SettingService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Sett_Srv<% } else { %>SettSrv<% } %><% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<% } %>{
+
+<%- i %>return (<%- jumboSpace %>require(<%- quoteChar %>./../classes/Controller.js<%- quoteChar %>)<%- jumboSpace %>).extend(<% if ( blockSpace === 1 ) { %>
+<%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %>service: <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>
+<%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>{
+<%- i %><%- i %><%- i %>// Get a package by id
+<%- i %><%- i %><%- i %><% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>get_action<% } else { %>getAction<% } %><% } else { %>get<% } %>: function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<% if ( declareOnce ) { %>
+<%- i %><%- i %><%- i %><%- i %>var self = this<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %> = {}<%- semicolon %>
+<% } else { %>
+<%- i %><%- i %><%- i %><%- i %>var self = this<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %>var <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %> = {}<%- semicolon %>
+<% } %>
+<%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>.<% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>find_by_id<% } else { %>findById<% } %><% } else { %><% if ( functionCase === 0 ) { %>find_id<% } else { %>findId<% } %><% } %>(<%- jumboSpace %>this.req.params.id<%- jumboSpace %>)<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then(<%- jumboSpace %>function(<%- jumboSpace %><% if ( variableCase === 0 ) { %>the_package<% } else { %>thePackage<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// Update views when fetching
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %><% if ( variableCase === 0 ) { %>the_package<% } else { %>thePackage<% } %> && <% if ( variableCase === 0 ) { %>the_package<% } else { %>thePackage<% } %>.id<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %> = <% if ( variableCase === 0 ) { %>the_package<% } else { %>thePackage<% } %><%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>++<% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %>.views<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// Update in the database
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>.update(<%- jumboSpace %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %>.id, <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %><%- jumboSpace %>)<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then(<%- jumboSpace %>function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// Convert the settings before sending them over
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>return <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Setting_Service<% } else { %>SettingService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Sett_Srv<% } else { %>SettSrv<% } %><% } %>.<% if ( functionCase === 0 ) { %>convert_settings<% } else { %>convertSettings<% } %>(<%- jumboSpace %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %>.settings<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then(<%- jumboSpace %>function(<%- jumboSpace %><% if ( variableCase === 0 ) { %>new_settings<% } else { %>newSettings<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %>.settings = <% if ( variableCase === 0 ) { %>new_settings<% } else { %>newSettings<% } %><%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// Get the sample code
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>return <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>.<% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>get_sample_code<% } else { %>getSampleCode<% } %><% } else { %><% if ( functionCase === 0 ) { %>get_code<% } else { %>getCode<% } %><% } %>(<%- jumboSpace %><% if ( variableCase === 0 ) { %>new_settings<% } else { %>newSettings<% } %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then( function( <% if ( variableCase === 0 ) { %>sample_code<% } else { %>sampleCode<% } %> )<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// We need to copy <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %> because otherwise this non-existing attribute (in the model) is not passed on
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>var <% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_package_copy<% } else { %>thePackageCopy<% } %><% } else { %><% if ( variableCase === 0 ) { %>tmp_package<% } else { %>tmpPackage<% } %><% } %> = JSON.parse(<%- jumboSpace %>JSON.stringify(<% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_global_package<% } else { %>theGlobalPackage<% } %><% } else { %><% if ( variableCase === 0 ) { %>global_pckg<% } else { %>globalPckg<% } %><% } %>)<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_package_copy<% } else { %>thePackageCopy<% } %><% } else { %><% if ( variableCase === 0 ) { %>tmp_package<% } else { %>tmpPackage<% } %><% } %>.<% if ( variableCase === 0 ) { %>sample_code<% } else { %>sampleCode<% } %> = <% if ( variableCase === 0 ) { %>sample_code<% } else { %>sampleCode<% } %><%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>self.send(<%- jumboSpace %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>the_package_copy<% } else { %>thePackageCopy<% } %><% } else { %><% if ( variableCase === 0 ) { %>tmp_package<% } else { %>tmpPackage<% } %><% } %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>fail(<%- jumboSpace %>self.proxy(<%- quoteChar %><% if ( functionCase === 0 ) { %>handle_exception<% } else { %>handleException<% } %><%- quoteChar %>)<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>self.send(<%- jumboSpace %>404, <%- quoteChar %>Package not found.<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<%- i %><%- i %><%- i %><%- i %><%- i %>})<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>fail(<%- jumboSpace %>this.proxy(<%- quoteChar %><% if ( functionCase === 0 ) { %>handle_exception<% } else { %>handleException<% } %><%- quoteChar %>)<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+
+<%- i %><%- i %><%- i %>// Create a package
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>post_action<% } else { %>postAction<% } %><% } else { %>post<% } %>: function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %>var data = this.req.body<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>data.id<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>return this.<% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>put_action<% } else { %>putAction<% } %><% } else { %>put<% } %>()<%- semicolon %>
+<% if ( oneLineBrackets ) { %><%- i %><%- i %><%- i %><%- i %>}
+<% } %>
+<%- i %><%- i %><%- i %><%- i %><% if ( variableNaming === 0 ) { %><% if ( variableCase === 0 ) { %>Package_Service<% } else { %>PackageService<% } %><% } else { %><% if ( variableCase === 0 ) { %>Package_Srv<% } else { %>PackageSrv<% } %><% } %>.create( data )<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>then(<%- jumboSpace %>this.proxy(<%- quoteChar %>send<%- quoteChar %>)<%- jumboSpace %>)<% if ( concatenationPlace === 1 ) { %>.<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( concatenationPlace === 0 ) { %>.<% } %>fail(<%- jumboSpace %>this.proxy(<%- quoteChar %><% if ( functionCase === 0 ) { %>handle_exception<% } else { %>handleException<% } %><%- quoteChar %>)<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+
+<%- i %><%- i %><%- i %>// Delete a package
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><% if ( functionNaming === 0 ) { %><% if ( functionCase === 0 ) { %>delete_action<% } else { %>deleteAction<% } %><% } else { %>destroy<% } %>: function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %>this.send(<%- jumboSpace %>403, <%- quoteChar %>Deletions are not allowed<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %>}
+<%- i %><%- i %>})<%- semicolon %>
+}<%- semicolon %>
+
+module.exports = function(<%- jumboSpace %>sequelize, DataTypes<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<% } %>{
+<%- i %>return sequelize.define(<%- jumboSpace %><%- quoteChar %>Package<%- quoteChar %>,<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><% } %>{
+<%- i %><%- i %>id:<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %>type: DataTypes.INTEGER<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>primaryKey: true<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>autoIncrement: true
+<%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>slug:<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %>type: DataTypes.STRING<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>allowNull: false<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>unique: true
+<%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>settings:<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %>type: DataTypes.TEXT<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>allowNull: false
+<%- i %><%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>views:<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %>type: DataTypes.INTEGER<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>allowNull: false
+<%- i %><%- i %>}
+<%- i %>}<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>{
+<%- i %><%- i %>paranoid: true
+<%- i %>})<%- semicolon %>
+}<%- semicolon %>
+
+define(<% if ( blockSpace === 1 ) { %>
+<%- i %><% } %>[
+<%- i %><%- i %><%- quoteChar %>app<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>jquery<%- quoteChar %>
+<%- i %>]<% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>function(<%- jumboSpace %>app, $<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><% } %>{
+<%- i %><%- i %><%- quoteChar %>use strict<%- quoteChar %><%- semicolon %>
+<%- i %><%- i %>
+<%- i %><%- i %>app.controller(<%- jumboSpace %><%- quoteChar %>Menu<%- quoteChar %>,<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><% } %>[
+<%- i %><%- i %><%- i %><%- quoteChar %>$scope<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>$rootScope<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>$location<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>$anchorScroll<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>$routeParams<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %><%- quoteChar %>$timeout<%- quoteChar %><% if ( variableCommaPlace === 1 ) { %>,<% } %>
+<%- i %><%- i %><%- i %><% if ( variableCommaPlace === 0 ) { %>, <% } %>function(<%- jumboSpace %>$scope, $rootScope, $location, $routeParams, $timeout<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %>// Init $scope properties
+<%- i %><%- i %><%- i %><%- i %>// $scope action methods
+<%- i %><%- i %><%- i %><%- i %>$scope.actions =<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %>// Apparently AngularJS freaks out about anchors, so we need to create this
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( functionCase === 0 ) { %>go_to<% } else { %>goTo<% } %>: function(<%- jumboSpace %>id<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<% if ( declareOnce ) { %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>var <% if ( functionNaming === 0 ) { %>scrollToId<% } else { %>doScroll<% } %><%- semicolon %>
+<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( ! declareOnce ) { %>var <% } %><% if ( functionNaming === 0 ) { %>scrollToId<% } else { %>doScroll<% } %> = function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>var $element = $(<%- jumboSpace %><%- quoteChar %>#<%- quoteChar %> + id<%- jumboSpace %>)<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>$element.length<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>$location.search(<% if ( blockSpace === 1 ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %>: id
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>})<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>// If we<%- quoteChar %>re trying to get to generate, we need to show the form first (and it<%- quoteChar %>ll scroll automatically)
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>id === <%- quoteChar %>generate<%- quoteChar %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>setTimeout(<%- jumboSpace %>function()<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>$(<%- jumboSpace %><%- quoteChar %>.start-button<%- quoteChar %><%- jumboSpace %>).trigger(<%- jumboSpace %><%- quoteChar %>click<%- quoteChar %><%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}, 10<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>$(<%- jumboSpace %><%- quoteChar %>html, body<%- quoteChar %><%- jumboSpace %>).animate(<% if ( blockSpace === 1 ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>scrollTop: (<%- jumboSpace %>$element.offset().top - 50<%- jumboSpace %>)
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>},<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>500<%- jumboSpace %>)<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>$location.path() !== <%- quoteChar %>/<%- quoteChar %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>$location.path(<%- jumboSpace %><%- quoteChar %>/<%- quoteChar %><%- jumboSpace %>).search(<% if ( blockSpace === 1 ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %>: id
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>})<%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %><% if ( functionNaming === 0 ) { %>scrollToId<% } else { %>doScroll<% } %>()<%- semicolon %>
+<% if ( oneLineBrackets ) { %><%- i %><%- i %><%- i %><%- i %><%- i %><%- i %>}<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %>}
+<%- i %><%- i %><%- i %><%- i %>}<%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %>$rootScope.$on(<%- jumboSpace %><%- quoteChar %>$routeChangeSuccess<%- quoteChar %>, function(<%- jumboSpace %><% if ( variableCase === 0 ) { %>angular_event<% } else { %>angularEvent<% } %>, <% if ( variableCase === 0 ) { %>new_route<% } else { %>newRoute<% } %>, <% if ( variableCase === 0 ) { %>old_route<% } else { %>oldRoute<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><% } %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %>// On the first load, $routeParams has nothing, but $location.search() does
+<%- i %><%- i %><%- i %><%- i %><%- i %>var <% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %><%- semicolon %>
+
+<%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>$routeParams.<% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %> = $routeParams.<% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %><%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( oneLineBrackets ) { %>}<% } %><% if ( blockSpace === 0 ) { %><% if ( oneLineBrackets ) { %> <% } %><% } else if ( oneLineBrackets ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else if (<%- jumboSpace %>$location.search() && $location.search().<% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %> = $location.search().<% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %><%- semicolon %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% if ( oneLineBrackets ) { %>}<% } %><% if ( blockSpace === 0 ) { %><% if ( oneLineBrackets ) { %> <% } %><% } else if ( oneLineBrackets ) { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %>else<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %> = <%- quoteChar %><%- quoteChar %><%- semicolon %>
+<% if ( oneLineBrackets ) { %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<% } %>
+<%- i %><%- i %><%- i %><%- i %><%- i %>// Only trigger this on the homepage
+<%- i %><%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %> && <% if ( variableCase === 0 ) { %>new_route<% } else { %>newRoute<% } %>.loadedTemplateUrl.indexOf(<%- quoteChar %>home.html<%- quoteChar %>) !== -1<%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %>$scope.actions.<% if ( functionCase === 0 ) { %>go_to<% } else { %>goTo<% } %>(<%- jumboSpace %><% if ( variableCase === 0 ) { %>go_to<% } else { %>goTo<% } %>, true<%- jumboSpace %>)<%- semicolon %>
+<% if ( oneLineBrackets ) { %><%- i %><%- i %><%- i %><%- i %><%- i %>}
+<% } %>
+<%- i %><%- i %><%- i %><%- i %>})<%- semicolon %>
+<%- i %><%- i %><%- i %>}
+<%- i %><%- i %>])<%- semicolon %>
+<%- i %>}
+)<%- semicolon %>

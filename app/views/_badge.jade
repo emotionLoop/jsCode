@@ -1,0 +1,23 @@
+div.badge-options
+  h3 Badge code!
+
+  p You can copy the following code to put on your GitHub README, or share anywhere:
+
+  h4 Markdown/GitHub
+
+  textarea.large(name='markdown', data-content='[![jsCode.org - JavaScript Coding Guidelines](https://img.shields.io/badge/jscode-[SLUG]-blue.svg?style=flat)]([URL])') ...
+
+  h4 HTML
+
+  textarea.large(name='html', data-content='<a href="[URL]"><img src="https://img.shields.io/badge/jscode-[SLUG]-blue.svg?style=flat" alt="jsCode.org - JavaScript Coding Guidelines" /></a>') ...
+
+  h4 URL
+
+  input.large(type='text', value='...', data-content='https://img.shields.io/badge/jscode-[SLUG]-blue.svg?style=flat')
+
+  h3 Here's how it looks:
+
+  img.sample-image(data-src='https://img.shields.io/badge/jscode-[SLUG]-blue.svg?style=flat')
+
+  a(href='#').badge-close
+    i.icon-close!=''

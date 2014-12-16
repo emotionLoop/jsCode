@@ -1,0 +1,116 @@
+
+//- # home
+
+extends layout
+
+block content
+  section.steps.clearfix
+    .step-1
+      p Step 1.
+      h2 Define Guidelines
+
+    .step-2
+      p Step 2.
+      h2 Preview & Save
+
+    .step-3
+      p Step 3.
+      h2 Share & Enjoy
+
+  button(type='button').start-button.button.large Start
+
+  section#generate.generate-package-container
+    nav.form-steps
+      ul
+        li: a(href='#') Step 1
+        li: a(href='#') Step 2
+        li: a(href='#') Step 3
+
+    form.generate-package-form
+      .form-step-container.step-1
+        .clearfix
+          each settingGroup in settings
+            fieldset
+              h3 #{ settingGroup.name }
+
+              each setting in settingGroup.settings
+                .setting-container
+                  label
+                    input(type='radio', name='setting_#{ setting.group }', value='#{ setting.name }', data-id='#{ setting.id }', data-group='#{ setting.group }', required)
+                    | #{ setting.label }
+                    a(href='#', data-helper=setting.id).helper-open
+                      i.icon-help!=''
+                  .helper(data-id=setting.id)!=setting.helper
+                  a.helper-close(href='#', data-helper=setting.id)
+                    i.icon-close!=''
+
+        .email-wrapper
+          h3 Email
+          p Optional. If your guidelines get famous enough, we will contact you to define a unique slug for it.
+          input(type='email', name='email', value='')#package-email.large
+
+        .continue-button-container
+          button(type='button').continue-button.button.large Continue
+
+      .form-step-container.step-2
+        h3
+          a(href='#').open-preview
+            i.icon-preview!=''
+            | Preview your JavaScript code guidelines
+          small ( Will open in a new window )
+
+        .save-button-container
+          button(type='button').back-button.button.large Back
+          button(type='submit').save-button.button.large Save
+
+      .form-step-container.step-3
+        h3
+          a(href='#').share-options
+            i.icon-share!=''
+            | Share your new Code Guideline!
+
+        h3
+          a(href='#').view-package
+            i.icon-preview!=''
+            | View your Code Guideline!
+
+  include _sharing.jade
+
+  section#popular.popular-guidelines(ng-show='data.popularGuidelines.length')
+    h2 Popular Guidelines
+      a(name='popular')!=''
+
+    ul
+      each package in popularPackages
+        li
+          a(href='/#{ package.slug }') #{ package.slug }
+
+    h2 Latest Guidelines
+      a(name='latest')!=''
+
+    ul
+      each package in latestPackages
+        li
+          a(href='/#{ package.slug }') #{ package.slug }
+
+  section#why.why-jscode.clearfix
+    .ten.columns.boxed
+      h2 Why jsCode?
+
+      p JavaScript is awesome, and while <a href="http://jslint.com" target="_blank">JSLint</a> and <a href="http://jshint.com" target="_blank">JSHint</a> help build better code, there is no real standard for the "details".
+
+      p We've created this page because we were tired of not having a "common standard" to share coding guidelines with coworkers and other programmers.
+
+      p The need for customization arose because of the fact people code in a lot of different ways in JavaScript, and it's ok to have preferences, we just all need to agree on them.
+
+      h2 How do I use jsCode?
+
+      ol
+        li Create a package
+        li Choose the coding standards you agree with
+        li Share it with your coworkers
+        li ???
+        li Profit
+
+append scripts
+  script(src='/js/home.js')
