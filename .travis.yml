@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - '0.10'
+branches:
+  only:
+    - master
 services:
 - redis-server
 - mongodb
@@ -11,7 +14,13 @@ after_script:
 - cat ./coverage/lcov.info | coveralls
 - npm install -g codeclimate-test-reporter
 - cat ./coverage/lcov.info | codeclimate
+env:
+  global:
+    - "REPOSITORY=jscode"
+  secure: "DKMHwc/ivcEcIOXMxQ3mAFm+3EXH20ngDdSPH2SPaQAdo8rj20Kh9W9RDPxZvhkhD+HLVjOBCSLl45z8NMQeNd7BGnz8vBzluO1ROtgN4z18qf1VG5jrzOleCsDpV7PKrlewnIhvvSTc2viQFoGEQr6r398VyrYMkSllssnUwwE="
+after_success:
+    "curl --data 'deploy={\"repository\":\"'$REPOSITORY'\",\"branch\":\"'$TRAVIS_BRANCH'\"}' https://githooks.emotionloop.com/?k=$AUTH_KEY"
 addons:
   code_climate:
     repo_token:
-      secure: ""
+      secure: "aAkcxTM3U208gXBz6tZkrx6OJKx7Mf3lHiS/IqTZHJuaCbLM37snufSwcez9uYRV5RLdC8KeMe2350opWqV5+FTci57smTKoJrLM0ilz/+vWfLJT4/WDBjdil7NQml3uaJLf+WqDfZZCyG1y5O+J7hQBqQB9Z2KHgOzGYshBOBw="
