@@ -104,6 +104,7 @@
 
   // Toggle Sharing
   function toggleSharing( event ) {
+    /*jshint validthis: true */
     event.preventDefault();
 
     var $this = $( this );
@@ -127,6 +128,7 @@
 
   // Toggle Badges
   function toggleBadges( event ) {
+    /*jshint validthis: true */
     event.preventDefault();
 
     var $this = $( this );

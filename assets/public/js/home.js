@@ -1,3 +1,4 @@
+/*global hljs, sweetAlert */
 (function( window, $, hljs, sweetAlert ) {
   'use strict';
 
@@ -81,6 +82,7 @@
 
   // Start package form
   function startPackageForm( event ) {
+    /*jshint validthis: true */
     event.preventDefault();
 
     $( '.generate-package-container' ).addClass( 'show' );
@@ -144,6 +146,7 @@
 
     // Loop through every radio input, see if every group has something chosen
     $( ':radio' ).each( function() {
+      /*jshint validthis: true */
       // If we already found an error, skip it
       if ( foundErrors ) {
         return false;
@@ -171,6 +174,7 @@
 
   // Toggle Helper
   function toggleHelper( event ) {
+    /*jshint validthis: true */
     event.preventDefault();
 
     var $this = $( this );

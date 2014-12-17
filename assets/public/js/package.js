@@ -1,3 +1,4 @@
+/*global hljs, sweetAlert */
 (function( window, $, hljs, sweetAlert ) {
   'use strict';
 
@@ -29,6 +30,7 @@
 
   // Toggle Helper
   function toggleHelper( event ) {
+    /*jshint validthis: true */
     event.preventDefault();
 
     var $this = $( this );
