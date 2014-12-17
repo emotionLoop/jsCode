@@ -64,14 +64,14 @@ html.no-js
         p ©
           a(href='http://emotionloop.com', target='_blank') emotionLoop
 
-    <!-- build:js /js/app.js -->
     block scripts
+      <!-- build:js /js/app.js -->
       script(src='/bower/jquery/dist/jquery.js')
       script(src='/bower/highlightjs/highlight.pack.js')
       script(src='/bower/sweetalert/lib/sweet-alert.min.js')
       script(src='/js/plugins.js')
       script(src='/js/main.js')
-    <!-- endbuild -->
+      <!-- endbuild -->
 
     block messages
       include _messages.jade

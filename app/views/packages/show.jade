@@ -40,6 +40,8 @@ block content
     include ../_badge.jade
 
 append scripts
+  <!-- build:js /js/package.js -->
   script(src='/js/package.js')
+  <!-- endbuild -->
   script.
     window.packageSlug = '#{ _package.slug }';
