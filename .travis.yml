@@ -11,6 +11,7 @@ before_script:
 script: npm run-script test-travis
 after_script:
 - npm install -g coveralls@2
+- npm install -g codeclimate-test-reporter
 - cat ./coverage/lcov.info | coveralls
 - npm install -g codeclimate-test-reporter
 - cat ./coverage/lcov.info | codeclimate

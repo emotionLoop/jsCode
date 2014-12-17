@@ -111,3 +111,7 @@ assets/public/bower/
 coverage/
 boot/local.js
 .vagrant/
+!assets/public/css/base.css
+!assets/public/css/fontello.css
+!assets/public/css/layout.css
+!assets/public/css/skeleton.css
