@@ -34,7 +34,7 @@ exports = module.exports = function( Package ) {
     // Return the package or render it
     res.format({
       html: function() {
-        res.render( 'packages/show', {
+        res.render( 'package', {
           _package: _package
         });
       },
@@ -127,7 +127,7 @@ exports = module.exports = function( Package ) {
       // Return the package or render it
       res.format({
         html: function() {
-          res.render( 'packages/show', {
+          res.render( 'package', {
             _package: _package
           });
         },
