@@ -3,6 +3,7 @@
 [![Build Status](https://img.shields.io/travis/emotionLoop/jsCode.svg?style=flat)](http://travis-ci.org/emotionLoop/jsCode)
 [![Coverage Status](https://img.shields.io/coveralls/emotionLoop/jsCode.svg?style=flat)](https://coveralls.io/r/emotionLoop/jsCode)
 [![Code Climate](https://img.shields.io/codeclimate/github/emotionLoop/jsCode.svg?style=flat)](https://codeclimate.com/github/emotionLoop/jsCode)
+[![jsCode.org - JavaScript Coding Guidelines](https://img.shields.io/badge/jscode-bruno-blue.svg?style=flat)](http://jscode.org/bruno)
 
 jsCode allows you to generate and share your own JavaScript coding guidelines.
 
