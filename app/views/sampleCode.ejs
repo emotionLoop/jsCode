@@ -38,10 +38,10 @@ module.exports = function(<%- jumboSpace %>db, models<%- jumboSpace %>)<% if ( b
 <%- i %><%- i %><%- i %><% } %>{
 <%- i %><%- i %><%- i %><%- i %>// We need data.settings to be a string, but we accept a string or an object
 <%- i %><%- i %><%- i %><%- i %>if (<%- jumboSpace %>typeof data.settings === <%- quoteChar %>object<%- quoteChar %><%- jumboSpace %>)<% if ( blockSpace === 0 ) { %> <% } else { %>
-<%- i %><%- i %><%- i %><%- i %><% } %>{
-<%- i %><%- i %><%- i %><%- i %><%- i %>data.settings = JSON.stringify(<%- jumboSpace %>data.settings<%- jumboSpace %>)<%- semicolon %>
-<%- i %><%- i %><%- i %><%- i %>}
-
+<%- i %><%- i %><%- i %><%- i %><% } %><% if ( oneLineBrackets ) { %>{
+<%- i %><%- i %><%- i %><%- i %><%- i %><% } else if ( blockSpace === 1 ) { %><%- i %><% } %>data.settings = JSON.stringify(<%- jumboSpace %>data.settings<%- jumboSpace %>)<%- semicolon %>
+<% if ( oneLineBrackets ) { %><%- i %><%- i %><%- i %><%- i %>}
+<% } %>
 <%- i %><%- i %><%- i %><%- i %>// Check if a similar package exists (with the same configs) and return it if so
 <%- i %><%- i %><%- i %><%- i %>this.find(<% if ( blockSpace === 1 ) { %>
 <%- i %><%- i %><%- i %><%- i %><%- i %><% } %>{
