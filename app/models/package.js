@@ -398,10 +398,10 @@ exports = module.exports = function( mongoose, iglooMongoosePlugin, settings ) {
     // Options: Quotes
     if ( convertedSettings[10] && convertedSettings[10].name === 'quotes_single' ) {
       // Single
-      options.quotMark = '"single"';
+      options.quotMark = 'single';
     } else {
       // Double
-      options.quotMark = '"double"';
+      options.quotMark = 'double';
     }
 
     // Options: Semicolons
