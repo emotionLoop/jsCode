@@ -7,9 +7,11 @@
 
 jsCode allows you to generate and share your own JavaScript coding guidelines.
 
-# This is no longer maintained. The code is kept here for historical reasons. **
+## NOTE: This is no longer maintained.
 
 Please refer to https://github.com/rwaldron/idiomatic.js and http://eslint.org/ for good guides.
+
+_The code is kept here for historical reasons._
 
 --
 
