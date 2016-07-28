@@ -7,6 +7,12 @@
 
 jsCode allows you to generate and share your own JavaScript coding guidelines.
 
+# This is no longer maintained. The code is kept here for historical reasons. **
+
+Please refer to https://github.com/rwaldron/idiomatic.js and http://eslint.org/ for good guides.
+
+--
+
 ## Pre-requisites
 You need node.js, redis, and mongo.
 
