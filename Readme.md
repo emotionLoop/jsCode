@@ -107,4 +107,4 @@ npm test
 
 MIT.
 
-If you find value in this, [please consider donating a dollar](https://medium.com/@BrunoBernardino/if-i-ve-helped-you-consider-donating-86952f22e3b4).
+If you find value in this, [please consider donating a dollar](https://thoughts.brunobernardino.com/if-i-ve-helped-you-consider-donating/).
